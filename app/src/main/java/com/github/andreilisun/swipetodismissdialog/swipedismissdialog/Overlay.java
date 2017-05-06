@@ -1,4 +1,4 @@
-package com.github.andreilisun.swipetodismissdialog;
+package com.github.andreilisun.swipetodismissdialog.swipedismissdialog;
 
 import android.animation.ObjectAnimator;
 import android.animation.PropertyValuesHolder;
@@ -15,10 +15,11 @@ import android.view.WindowManager;
 import android.view.animation.AccelerateDecelerateInterpolator;
 import android.widget.FrameLayout;
 
+@SuppressLint("ViewConstructor")
 public class Overlay extends FrameLayout {
 
-    private GestureDetector gestureDetector;
-    private Params params;
+    private final GestureDetector gestureDetector;
+    private final Params params;
 
     public Overlay(@NonNull Context context, Params params) {
         super(context);
@@ -27,11 +28,9 @@ public class Overlay extends FrameLayout {
         init();
     }
 
-    // TODO: 06.05.17 If no focus, focus this view
     private void init() {
         setOnClickListener(overlayClickListener);
         setBackgroundColor(params.overlayColor);
-        // TODO: 06.05.17 if touch listener has been set
         params.view.setOnTouchListener(touchListener);
         LayoutParams layoutParams = new LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT,
                 ViewGroup.LayoutParams.WRAP_CONTENT, Gravity.CENTER);
@@ -58,14 +57,13 @@ public class Overlay extends FrameLayout {
         windowManager.removeViewImmediate(this);
     }
 
-    private OnTouchListener touchListener = new OnTouchListener() {
+    private final OnTouchListener touchListener = new OnTouchListener() {
 
-        public float initCenterX;
+        private float initCenterX;
         private float lastEventY;
         private float lastEventX;
         private float initY;
         private float initX;
-
 
         public boolean onTouch(View view, MotionEvent motionEvent) {
             /*Fling detected*/
@@ -122,7 +120,7 @@ public class Overlay extends FrameLayout {
         }
     };
 
-    private OnClickListener overlayClickListener = new OnClickListener() {
+    private final OnClickListener overlayClickListener = new OnClickListener() {
         @Override
         public void onClick(View v) {
             cancel();

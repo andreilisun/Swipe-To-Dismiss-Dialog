@@ -6,6 +6,11 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Toast;
 
+import com.github.andreilisun.swipetodismissdialog.swipedismissdialog.OnCancelListener;
+import com.github.andreilisun.swipetodismissdialog.swipedismissdialog.OnSwipeDismissListener;
+import com.github.andreilisun.swipetodismissdialog.swipedismissdialog.SwipeDismissDialog;
+import com.github.andreilisun.swipetodismissdialog.swipedismissdialog.SwipeDismissDirection;
+
 public class MainActivity extends AppCompatActivity {
 
     private String TAG = "MainActivity";
@@ -14,6 +19,7 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         SwipeDismissDialog.Builder dialogBuilder = new SwipeDismissDialog.Builder(this);
+        float flingVelocity = .2f;
         final SwipeDismissDialog swipeDismissDialog = dialogBuilder
                 .setLayoutResId(R.layout.layout_dialog)
                 .setOnSwipeDismissListener(new OnSwipeDismissListener() {
@@ -24,7 +30,7 @@ public class MainActivity extends AppCompatActivity {
                     }
                 })
                 .setOverlayColor(Color.parseColor("#66ea1717"))
-                .setFlingVelocity(0.1f)
+                .setFlingVelocity(flingVelocity)
                 .setOnCancelListener(new OnCancelListener() {
                     @Override
                     public void onCancel(View v) {
