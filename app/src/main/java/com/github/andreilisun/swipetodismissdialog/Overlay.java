@@ -39,7 +39,6 @@ public class Overlay extends FrameLayout {
     }
 
     private void dismiss(SwipeDismissDirection direction) {
-        // TODO: 06.05.17 callback
         if (params.swipeDismissListener != null) {
             params.swipeDismissListener.onSwipeDismiss(this, direction);
         }
@@ -61,10 +60,12 @@ public class Overlay extends FrameLayout {
 
     private OnTouchListener touchListener = new OnTouchListener() {
 
-        public float lastEventY;
-        public float lastEventX;
-        public float initY;
-        public float initX;
+        public float initCenterX;
+        private float lastEventY;
+        private float lastEventX;
+        private float initY;
+        private float initX;
+
 
         public boolean onTouch(View view, MotionEvent motionEvent) {
             /*Fling detected*/
@@ -79,6 +80,7 @@ public class Overlay extends FrameLayout {
                     initY = view.getY();
                     lastEventX = motionEvent.getRawX();
                     lastEventY = motionEvent.getRawY();
+                    initCenterX = initX + view.getWidth() / 2;
                     break;
                 }
 
@@ -87,8 +89,12 @@ public class Overlay extends FrameLayout {
                     float eventY = motionEvent.getRawY();
                     float eventDx = eventX - lastEventX;
                     float eventDy = eventY - lastEventY;
+                    float centerX = view.getX() + eventDx + view.getWidth() / 2;
+                    float centerDx = centerX - initCenterX;
                     view.setX(view.getX() + eventDx);
                     view.setY(view.getY() + eventDy);
+                    float rotationAngle = centerDx * params.horizontalOscillation / initCenterX;
+                    view.setRotation(rotationAngle);
                     view.invalidate();
                     lastEventX = eventX;
                     lastEventY = eventY;
@@ -133,7 +139,7 @@ public class Overlay extends FrameLayout {
         return false;
     }
 
-    class SwipeGestureListener extends GestureDetector.SimpleOnGestureListener {
+    private class SwipeGestureListener extends GestureDetector.SimpleOnGestureListener {
         @Override
         public boolean onFling(MotionEvent e1, MotionEvent e2, float velocityX, float velocityY) {
             int maxVelocity = ViewConfiguration.get(getContext()).getScaledMaximumFlingVelocity();

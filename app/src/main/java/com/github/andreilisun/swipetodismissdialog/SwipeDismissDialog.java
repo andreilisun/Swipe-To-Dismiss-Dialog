@@ -84,6 +84,11 @@ public class SwipeDismissDialog {
             return this;
         }
 
+        public Builder setHorizontalOscillation(@FloatRange(from = 0.0, to = 35.0) float oscillation) {
+            params.horizontalOscillation = oscillation;
+            return this;
+        }
+
         public SwipeDismissDialog build() {
             if (params.view == null) {
                 throw new IllegalStateException("view should be set with setView(View view) method");

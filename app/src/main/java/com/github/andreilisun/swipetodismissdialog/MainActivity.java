@@ -3,7 +3,6 @@ package com.github.andreilisun.swipetodismissdialog;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
-import android.view.KeyEvent;
 import android.view.View;
 import android.widget.Toast;
 
@@ -25,13 +24,14 @@ public class MainActivity extends AppCompatActivity {
                     }
                 })
                 .setOverlayColor(Color.parseColor("#66ea1717"))
-                .setFlingVelocity(0.2f)
+                .setFlingVelocity(0.1f)
                 .setOnCancelListener(new OnCancelListener() {
                     @Override
                     public void onCancel(View v) {
                         Toast.makeText(MainActivity.this, "Canceled", Toast.LENGTH_SHORT).show();
                     }
                 })
+                .setHorizontalOscillation(35f)
                 .build()
                 .show();
     }
