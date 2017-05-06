@@ -31,7 +31,7 @@ public class Overlay extends FrameLayout {
 
     // TODO: 06.05.17 If no focus, focus this view
     private void init() {
-        setBackgroundColor(Color.parseColor("#80444444"));
+        setBackgroundColor(params.overlayColor);
         params.view.setOnTouchListener(touchListener);
         LayoutParams layoutParams = new LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT,
                 ViewGroup.LayoutParams.WRAP_CONTENT, Gravity.CENTER);

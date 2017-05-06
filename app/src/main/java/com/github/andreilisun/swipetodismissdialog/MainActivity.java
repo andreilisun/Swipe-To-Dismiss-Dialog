@@ -1,7 +1,7 @@
 package com.github.andreilisun.swipetodismissdialog;
 
+import android.graphics.Color;
 import android.os.Bundle;
-import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Toast;
@@ -13,14 +13,6 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        /*setContentView(R.layout.activity_main);*/
-        /*View dialog = LayoutInflater.from(this).inflate(R.layout.layout_dialog, null);
-        View editText = dialog.findViewById(R.id.text_view);
-        editText.setFocusable(true);
-        editText.setFocusableInTouchMode(true);
-        editText.requestFocus();
-        Overlay swipeController = (Overlay) findViewById(R.id.swipeController);
-        swipeController.setView(dialog);*/
         SwipeDismissDialog.Builder dialogBuilder = new SwipeDismissDialog.Builder(this);
         dialogBuilder
                 .setLayoutResId(R.layout.layout_dialog)
@@ -31,6 +23,8 @@ public class MainActivity extends AppCompatActivity {
                                 Toast.LENGTH_SHORT).show();
                     }
                 })
+                .setOverlayColor(Color.parseColor("#66ea1717"))
+                .setFlingVelocity(0.2f)
                 .build()
                 .show();
     }

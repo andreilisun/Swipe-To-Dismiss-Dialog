@@ -2,6 +2,7 @@ package com.github.andreilisun.swipetodismissdialog;
 
 import android.content.Context;
 import android.graphics.PixelFormat;
+import android.support.annotation.ColorInt;
 import android.support.annotation.FloatRange;
 import android.support.annotation.LayoutRes;
 import android.support.annotation.NonNull;
@@ -70,6 +71,11 @@ public class SwipeDismissDialog {
 
         public Builder setOnSwipeDismissListener(@Nullable OnSwipeDismissListener swipeDismissListener) {
             params.swipeDismissListener = swipeDismissListener;
+            return this;
+        }
+
+        public Builder setOverlayColor(@ColorInt int color) {
+            params.overlayColor = color;
             return this;
         }
 
