@@ -3,57 +3,45 @@ package com.github.andreilisun.swipetodismissdialog;
 import android.animation.ObjectAnimator;
 import android.animation.PropertyValuesHolder;
 import android.content.Context;
-import android.support.annotation.AttrRes;
+import android.graphics.Color;
+import android.support.annotation.ColorInt;
 import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
-import android.util.AttributeSet;
 import android.util.Log;
 import android.view.GestureDetector;
 import android.view.Gravity;
+import android.view.KeyEvent;
 import android.view.MotionEvent;
 import android.view.View;
+import android.view.ViewConfiguration;
+import android.view.ViewGroup;
 import android.view.animation.AccelerateDecelerateInterpolator;
 import android.widget.FrameLayout;
 
 public class Overlay extends FrameLayout {
 
     private GestureDetector gestureDetector;
-    private View view;
+    private Params params;
 
-    public Overlay(@NonNull Context context) {
+    public Overlay(@NonNull Context context, Params params) {
         super(context);
+        this.params = params;
+        this.gestureDetector = new GestureDetector(context, new SwipeGestureListener());
         init(context);
     }
 
-    public Overlay(@NonNull Context context, @Nullable AttributeSet attrs) {
-        super(context, attrs);
-        init(context);
-    }
-
-    public Overlay(@NonNull Context context, @Nullable AttributeSet attrs, @AttrRes int defStyleAttr) {
-        super(context, attrs, defStyleAttr);
-        init(context);
-    }
-
-    public void setView(@NonNull View v) {
-        view = v;
-        view.setOnTouchListener(touchListener);
-        FrameLayout.LayoutParams params = new FrameLayout.LayoutParams(400, 400);
-        params.gravity = Gravity.CENTER;
-        addView(view, params);
-    }
-
+    // TODO: 06.05.17 If no focus, focus this view
     private void init(Context context) {
-        gestureDetector = new GestureDetector(context, new SwipeGestureListener());
+        setBackgroundColor(Color.parseColor("#80444444"));
+        params.view.setOnTouchListener(touchListener);
+        LayoutParams layoutParams = new LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT,
+                ViewGroup.LayoutParams.WRAP_CONTENT, Gravity.CENTER);
+        addView(params.view, layoutParams);
     }
 
     private OnTouchListener touchListener = new OnTouchListener() {
 
-        /*public int parentWidth;*/
         public float initDy;
         public float initDx;
-        public float initCenterY;
-        public float initCenterX;
         public float initY;
         public float initX;
 
@@ -69,26 +57,14 @@ public class Overlay extends FrameLayout {
                 case MotionEvent.ACTION_DOWN: {
                     initX = view.getX();
                     initY = view.getY();
-                    initCenterX = initX + view.getWidth() / 2;
-                    initCenterY = initY + view.getHeight() / 2;
                     initDx = initX - motionEvent.getRawX();
                     initDy = initY - motionEvent.getRawY();
-                    /*ViewParent parent = view.getParent();
-                    if (parent instanceof Overlay) {
-                        Overlay overlay = (Overlay) parent;
-                        parentWidth = overlay.getWidth();
-                    } else {
-                        throw new IllegalStateException("Overlay should be parent of a view");
-                    }*/
                     break;
                 }
 
                 case MotionEvent.ACTION_MOVE: {
                     view.setX(motionEvent.getRawX() + initDx);
                     view.setY(motionEvent.getRawY() + initDy);
-                    /*float verticalGap = (view.getX() - initX);
-                    Log.d("MOVE", "onTouch. Vertiacal gap: " + verticalGap);
-                    view.setRotation(*//*verticalGap / 10f*//*90);*/
                     view.invalidate();
                     break;
                 }
@@ -117,12 +93,44 @@ public class Overlay extends FrameLayout {
         }
     };
 
+    @Override
+    public boolean dispatchKeyEvent(KeyEvent event) {
+        /*Log.d(Overlay.class.getName(), "dispatchKeyEvent: " + (((ViewGroup)getFocusedChild()).getFocusedChild().getId() == R.id.edit_text));*/
+        Log.d(Overlay.class.getName(), "dispatchKeyEvent: ");
+        return super.dispatchKeyEvent(event);
+    }
+
+    @Override
+    public boolean onKeyDown(int keyCode, KeyEvent event) {
+        Log.d(Overlay.class.getName(), "onKeyDown: ");
+        return super.onKeyDown(keyCode, event);
+    }
+
+    @Override
+    public boolean onKeyUp(int keyCode, KeyEvent event) {
+        Log.d(Overlay.class.getName(), "onKeyUp: ");
+        return super.onKeyUp(keyCode, event);
+    }
+
     class SwipeGestureListener extends GestureDetector.SimpleOnGestureListener {
         @Override
         public boolean onFling(MotionEvent e1, MotionEvent e2, float velocityX, float velocityY) {
-            Log.d(Overlay.class.getName(), "onFling X: " + velocityX);
-            Log.d(Overlay.class.getName(), "onFling Y: " + velocityY);
-            return false;
+            /*Log.d(Overlay.class.getName(), "onFling X: " + velocityX);
+            Log.d(Overlay.class.getName(), "onFling Y: " + velocityY);*/
+            int maxVelocity = ViewConfiguration.get(getContext()).getScaledMaximumFlingVelocity();
+            int minVelocity = ViewConfiguration.get(getContext()).getScaledMinimumFlingVelocity();
+            /*Log.d(Overlay.class.getName(), "onFling. MAX velocity: " + maxVelocity);
+            Log.d(Overlay.class.getName(), "onFling. MIN velocity: " + minVelocity);*/
+            float velocityThreshold = 0.2f;
+            float normalizedVelocityX = Math.abs(velocityX) / maxVelocity;
+            float normalizedVelocityY = Math.abs(velocityY) / maxVelocity;
+            Log.d(Overlay.class.getName(), "onFling. NORMALIZED X velocity: " + normalizedVelocityX);
+            Log.d(Overlay.class.getName(), "onFling. NORMALIZED Y velocity: " + normalizedVelocityY);
+            if (normalizedVelocityX > velocityThreshold || normalizedVelocityY > velocityThreshold) {
+                return true;
+            } else {
+                return false;
+            }
         }
     }
 }
