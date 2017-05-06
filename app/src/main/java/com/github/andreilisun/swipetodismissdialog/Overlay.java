@@ -122,21 +122,12 @@ public class Overlay extends FrameLayout {
 
     @Override
     public boolean dispatchKeyEvent(KeyEvent event) {
-        /*Log.d(Overlay.class.getName(), "dispatchKeyEvent: " + (((ViewGroup)getFocusedChild()).getFocusedChild().getId() == R.id.edit_text));*/
-        Log.d(Overlay.class.getName(), "dispatchKeyEvent: ");
-        return super.dispatchKeyEvent(event);
-    }
-
-    @Override
-    public boolean onKeyDown(int keyCode, KeyEvent event) {
-        Log.d(Overlay.class.getName(), "onKeyDown: ");
-        return super.onKeyDown(keyCode, event);
-    }
-
-    @Override
-    public boolean onKeyUp(int keyCode, KeyEvent event) {
-        Log.d(Overlay.class.getName(), "onKeyUp: ");
-        return super.onKeyUp(keyCode, event);
+        if (event.getAction() == KeyEvent.ACTION_DOWN
+                && event.getKeyCode() == KeyEvent.KEYCODE_BACK) {
+            cancel();
+            return true;
+        }
+        return false;
     }
 
     class SwipeGestureListener extends GestureDetector.SimpleOnGestureListener {
