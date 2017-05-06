@@ -4,7 +4,6 @@ import android.animation.ObjectAnimator;
 import android.animation.PropertyValuesHolder;
 import android.content.Context;
 import android.graphics.Color;
-import android.support.annotation.ColorInt;
 import android.support.annotation.NonNull;
 import android.util.Log;
 import android.view.GestureDetector;
@@ -26,11 +25,11 @@ public class Overlay extends FrameLayout {
         super(context);
         this.params = params;
         this.gestureDetector = new GestureDetector(context, new SwipeGestureListener());
-        init(context);
+        init();
     }
 
     // TODO: 06.05.17 If no focus, focus this view
-    private void init(Context context) {
+    private void init() {
         setBackgroundColor(Color.parseColor("#80444444"));
         params.view.setOnTouchListener(touchListener);
         LayoutParams layoutParams = new LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT,

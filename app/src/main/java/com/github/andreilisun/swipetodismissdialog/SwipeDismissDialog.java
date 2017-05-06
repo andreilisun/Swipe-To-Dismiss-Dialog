@@ -4,6 +4,7 @@ import android.content.Context;
 import android.graphics.PixelFormat;
 import android.support.annotation.FloatRange;
 import android.support.annotation.LayoutRes;
+import android.support.annotation.NonNull;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.WindowManager;
@@ -20,7 +21,7 @@ public class SwipeDismissDialog {
         this.params = params;
     }
 
-    public void show() {
+    public SwipeDismissDialog show() {
         windowManager = (WindowManager) context.getSystemService(Context.WINDOW_SERVICE);
         WindowManager.LayoutParams layoutParams = new WindowManager.LayoutParams();
         layoutParams.height = WindowManager.LayoutParams.MATCH_PARENT;
@@ -30,6 +31,7 @@ public class SwipeDismissDialog {
         layoutParams.format = PixelFormat.TRANSLUCENT;
         overlay = new Overlay(context, params);
         windowManager.addView(overlay, layoutParams);
+        return this;
     }
 
     public void hide() {
@@ -46,7 +48,7 @@ public class SwipeDismissDialog {
             this.params = new Params();
         }
 
-        public Builder setView(View view) {
+        public Builder setView(@NonNull View view) {
             params.view = view;
             return this;
         }
@@ -66,7 +68,9 @@ public class SwipeDismissDialog {
         }
 
         public SwipeDismissDialog build() {
-            // TODO: 06.05.17 Check if view != null
+            if (params.view == null) {
+                throw new IllegalStateException("view should be set with setView(View view) method");
+            }
             return new SwipeDismissDialog(context, params);
         }
     }
