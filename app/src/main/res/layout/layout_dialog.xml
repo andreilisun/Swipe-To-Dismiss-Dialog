@@ -13,8 +13,8 @@
         android:layout_gravity="center"
         android:text="ABCD" />
 
-    <EditText
+    <!--<EditText
         android:id="@+id/edit_text"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
+        android:layout_height="wrap_content" />-->
 </FrameLayout>

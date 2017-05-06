@@ -4,7 +4,6 @@ import android.animation.ObjectAnimator;
 import android.animation.PropertyValuesHolder;
 import android.content.Context;
 import android.support.annotation.NonNull;
-import android.util.Log;
 import android.view.GestureDetector;
 import android.view.Gravity;
 import android.view.KeyEvent;
@@ -32,6 +31,7 @@ public class Overlay extends FrameLayout {
     private void init() {
         setOnClickListener(overlayClickListener);
         setBackgroundColor(params.overlayColor);
+        // TODO: 06.05.17 if touch listener has been set
         params.view.setOnTouchListener(touchListener);
         LayoutParams layoutParams = new LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT,
                 ViewGroup.LayoutParams.WRAP_CONTENT, Gravity.CENTER);
@@ -61,8 +61,8 @@ public class Overlay extends FrameLayout {
 
     private OnTouchListener touchListener = new OnTouchListener() {
 
-        public float initDy;
-        public float initDx;
+        public float lastEventY;
+        public float lastEventX;
         public float initY;
         public float initX;
 
@@ -72,31 +72,34 @@ public class Overlay extends FrameLayout {
                 return true;
             }
 
-
             int action = motionEvent.getAction();
             switch (action) {
                 case MotionEvent.ACTION_DOWN: {
                     initX = view.getX();
                     initY = view.getY();
-                    initDx = initX - motionEvent.getRawX();
-                    initDy = initY - motionEvent.getRawY();
+                    lastEventX = motionEvent.getRawX();
+                    lastEventY = motionEvent.getRawY();
                     break;
                 }
 
                 case MotionEvent.ACTION_MOVE: {
-                    view.setX(motionEvent.getRawX() + initDx);
-                    view.setY(motionEvent.getRawY() + initDy);
+                    float eventX = motionEvent.getRawX();
+                    float eventY = motionEvent.getRawY();
+                    float eventDx = eventX - lastEventX;
+                    float eventDy = eventY - lastEventY;
+                    view.setX(view.getX() + eventDx);
+                    view.setY(view.getY() + eventDy);
                     view.invalidate();
+                    lastEventX = eventX;
+                    lastEventY = eventY;
                     break;
                 }
 
                 case MotionEvent.ACTION_UP: {
-                    float deltaX = initX - view.getLeft();
-                    float deltaY = initY - view.getTop();
                     PropertyValuesHolder horizontalAnimation =
-                            PropertyValuesHolder.ofFloat("translationX", deltaX);
+                            PropertyValuesHolder.ofFloat("x", initX);
                     PropertyValuesHolder verticalAnimation =
-                            PropertyValuesHolder.ofFloat("translationY", deltaY);
+                            PropertyValuesHolder.ofFloat("y", initY);
                     PropertyValuesHolder rotateAnimation =
                             PropertyValuesHolder.ofFloat("rotation", 0f);
                     ObjectAnimator originBackAnimation =
