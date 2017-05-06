@@ -13,6 +13,7 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewConfiguration;
 import android.view.ViewGroup;
+import android.view.WindowManager;
 import android.view.animation.AccelerateDecelerateInterpolator;
 import android.widget.FrameLayout;
 
@@ -35,6 +36,20 @@ public class Overlay extends FrameLayout {
         LayoutParams layoutParams = new LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT,
                 ViewGroup.LayoutParams.WRAP_CONTENT, Gravity.CENTER);
         addView(params.view, layoutParams);
+    }
+
+    public void dismiss(SwipeDismissDirection direction) {
+        // TODO: 06.05.17 callback
+        if (params.swipeDismissListener != null) {
+            params.swipeDismissListener.onSwipeDismiss(this, direction);
+        }
+        dismiss();
+    }
+
+    public void dismiss() {
+        WindowManager windowManager = (WindowManager)
+                getContext().getSystemService(Context.WINDOW_SERVICE);
+        windowManager.removeViewImmediate(this);
     }
 
     private OnTouchListener touchListener = new OnTouchListener() {
@@ -114,18 +129,20 @@ public class Overlay extends FrameLayout {
     class SwipeGestureListener extends GestureDetector.SimpleOnGestureListener {
         @Override
         public boolean onFling(MotionEvent e1, MotionEvent e2, float velocityX, float velocityY) {
-            /*Log.d(Overlay.class.getName(), "onFling X: " + velocityX);
-            Log.d(Overlay.class.getName(), "onFling Y: " + velocityY);*/
             int maxVelocity = ViewConfiguration.get(getContext()).getScaledMaximumFlingVelocity();
-            int minVelocity = ViewConfiguration.get(getContext()).getScaledMinimumFlingVelocity();
-            /*Log.d(Overlay.class.getName(), "onFling. MAX velocity: " + maxVelocity);
-            Log.d(Overlay.class.getName(), "onFling. MIN velocity: " + minVelocity);*/
-            float velocityThreshold = 0.2f;
             float normalizedVelocityX = Math.abs(velocityX) / maxVelocity;
             float normalizedVelocityY = Math.abs(velocityY) / maxVelocity;
-            Log.d(Overlay.class.getName(), "onFling. NORMALIZED X velocity: " + normalizedVelocityX);
-            Log.d(Overlay.class.getName(), "onFling. NORMALIZED Y velocity: " + normalizedVelocityY);
-            if (normalizedVelocityX > velocityThreshold || normalizedVelocityY > velocityThreshold) {
+            if (normalizedVelocityX > params.flingVelocity) {
+                SwipeDismissDirection direction = (e2.getRawX() > e1.getRawX())
+                        ? SwipeDismissDirection.RIGHT
+                        : SwipeDismissDirection.LEFT;
+                dismiss(direction);
+                return true;
+            } else if (normalizedVelocityY > params.flingVelocity) {
+                SwipeDismissDirection direction = (e2.getRawY() > e1.getRawY())
+                        ? SwipeDismissDirection.BOTTOM
+                        : SwipeDismissDirection.TOP;
+                dismiss(direction);
                 return true;
             } else {
                 return false;

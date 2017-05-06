@@ -3,6 +3,8 @@ package com.github.andreilisun.swipetodismissdialog;
 import android.os.Bundle;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
+import android.view.View;
+import android.widget.Toast;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -22,6 +24,13 @@ public class MainActivity extends AppCompatActivity {
         SwipeDismissDialog.Builder dialogBuilder = new SwipeDismissDialog.Builder(this);
         dialogBuilder
                 .setLayoutResId(R.layout.layout_dialog)
+                .setOnSwipeDismissListener(new OnSwipeDismissListener() {
+                    @Override
+                    public void onSwipeDismiss(View view, SwipeDismissDirection direction) {
+                        Toast.makeText(MainActivity.this, "Dismissed direction: " + direction,
+                                Toast.LENGTH_SHORT).show();
+                    }
+                })
                 .build()
                 .show();
     }
