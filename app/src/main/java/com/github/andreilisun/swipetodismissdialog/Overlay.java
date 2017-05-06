@@ -31,6 +31,7 @@ public class Overlay extends FrameLayout {
 
     // TODO: 06.05.17 If no focus, focus this view
     private void init() {
+        setOnClickListener(overlayClickListener);
         setBackgroundColor(params.overlayColor);
         params.view.setOnTouchListener(touchListener);
         LayoutParams layoutParams = new LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT,
@@ -102,8 +103,14 @@ public class Overlay extends FrameLayout {
                     break;
                 }
             }
-
             return true;
+        }
+    };
+
+    private OnClickListener overlayClickListener = new OnClickListener() {
+        @Override
+        public void onClick(View v) {
+            dismiss();
         }
     };
 
