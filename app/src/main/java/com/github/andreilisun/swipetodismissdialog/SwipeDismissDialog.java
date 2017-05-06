@@ -37,7 +37,7 @@ public class SwipeDismissDialog {
     }
 
     public void hide() {
-        overlay.dismiss();
+        overlay.cancel();
     }
 
     public static class Builder {
@@ -76,6 +76,11 @@ public class SwipeDismissDialog {
 
         public Builder setOverlayColor(@ColorInt int color) {
             params.overlayColor = color;
+            return this;
+        }
+
+        public Builder setOnCancelListener(@Nullable OnCancelListener cancelListener) {
+            params.cancelListener = cancelListener;
             return this;
         }
 

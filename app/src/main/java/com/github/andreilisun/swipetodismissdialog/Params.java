@@ -11,9 +11,11 @@ public class Params {
     public View view = null;
     @FloatRange(from = 0, to = 1.0)
     public float flingVelocity = 0.15f;
-    @Nullable
-    public OnSwipeDismissListener swipeDismissListener;
     @ColorInt
     public int overlayColor = Color.parseColor("#80444444");
+    @Nullable
+    public OnSwipeDismissListener swipeDismissListener;
+    @Nullable
+    public OnCancelListener cancelListener;
     // TODO: 02.05.17 dragRotationAngle, cancelable
 }

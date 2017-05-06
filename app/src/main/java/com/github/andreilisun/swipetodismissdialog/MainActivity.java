@@ -25,6 +25,12 @@ public class MainActivity extends AppCompatActivity {
                 })
                 .setOverlayColor(Color.parseColor("#66ea1717"))
                 .setFlingVelocity(0.2f)
+                .setOnCancelListener(new OnCancelListener() {
+                    @Override
+                    public void onCancel(View v) {
+                        Toast.makeText(MainActivity.this, "Canceled", Toast.LENGTH_SHORT).show();
+                    }
+                })
                 .build()
                 .show();
     }

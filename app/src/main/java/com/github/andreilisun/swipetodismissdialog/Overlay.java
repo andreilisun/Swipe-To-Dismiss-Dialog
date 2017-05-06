@@ -3,7 +3,6 @@ package com.github.andreilisun.swipetodismissdialog;
 import android.animation.ObjectAnimator;
 import android.animation.PropertyValuesHolder;
 import android.content.Context;
-import android.graphics.Color;
 import android.support.annotation.NonNull;
 import android.util.Log;
 import android.view.GestureDetector;
@@ -39,7 +38,7 @@ public class Overlay extends FrameLayout {
         addView(params.view, layoutParams);
     }
 
-    public void dismiss(SwipeDismissDirection direction) {
+    private void dismiss(SwipeDismissDirection direction) {
         // TODO: 06.05.17 callback
         if (params.swipeDismissListener != null) {
             params.swipeDismissListener.onSwipeDismiss(this, direction);
@@ -47,7 +46,14 @@ public class Overlay extends FrameLayout {
         dismiss();
     }
 
-    public void dismiss() {
+    public void cancel() {
+        if (params.cancelListener != null) {
+            params.cancelListener.onCancel(params.view);
+        }
+        dismiss();
+    }
+
+    private void dismiss() {
         WindowManager windowManager = (WindowManager)
                 getContext().getSystemService(Context.WINDOW_SERVICE);
         windowManager.removeViewImmediate(this);
@@ -110,7 +116,7 @@ public class Overlay extends FrameLayout {
     private OnClickListener overlayClickListener = new OnClickListener() {
         @Override
         public void onClick(View v) {
-            dismiss();
+            cancel();
         }
     };
 
