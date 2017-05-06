@@ -3,11 +3,14 @@ package com.github.andreilisun.swipetodismissdialog.swipedismissdialog;
 import android.graphics.Color;
 import android.support.annotation.ColorInt;
 import android.support.annotation.FloatRange;
+import android.support.annotation.LayoutRes;
 import android.support.annotation.Nullable;
 import android.view.View;
 
 public class Params {
     public View view = null;
+    @LayoutRes
+    public int layoutRes = 0;
     @FloatRange(from = 0, to = 1.0)
     public float flingVelocity = 0.2f;
     @ColorInt

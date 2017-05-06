@@ -7,7 +7,6 @@ import android.support.annotation.FloatRange;
 import android.support.annotation.LayoutRes;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
-import android.view.LayoutInflater;
 import android.view.View;
 import android.view.WindowManager;
 
@@ -51,11 +50,13 @@ public class SwipeDismissDialog {
 
         public Builder setView(@NonNull View view) {
             params.view = view;
+            params.layoutRes = 0;
             return this;
         }
 
         public Builder setLayoutResId(@LayoutRes int layoutResId) {
-            params.view = LayoutInflater.from(context).inflate(layoutResId, null);
+            params.layoutRes = layoutResId;
+            params.view = null;
             return this;
         }
 
@@ -85,8 +86,9 @@ public class SwipeDismissDialog {
         }
 
         public SwipeDismissDialog build() {
-            if (params.view == null) {
-                throw new IllegalStateException("view should be set with setView(View view) method");
+            if (params.view == null && params.layoutRes == 0) {
+                throw new IllegalStateException("view should be set with setView(View view) " +
+                        "or with setLayoutResId(int layoutResId)");
             }
             return new SwipeDismissDialog(context, params);
         }

@@ -2,11 +2,13 @@ package com.github.andreilisun.swipetodismissdialog.swipedismissdialog;
 
 import android.animation.ObjectAnimator;
 import android.animation.PropertyValuesHolder;
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.support.annotation.NonNull;
 import android.view.GestureDetector;
 import android.view.Gravity;
 import android.view.KeyEvent;
+import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewConfiguration;
@@ -20,6 +22,7 @@ public class Overlay extends FrameLayout {
 
     private final GestureDetector gestureDetector;
     private final Params params;
+    private View dialog;
 
     public Overlay(@NonNull Context context, Params params) {
         super(context);
@@ -31,10 +34,15 @@ public class Overlay extends FrameLayout {
     private void init() {
         setOnClickListener(overlayClickListener);
         setBackgroundColor(params.overlayColor);
-        params.view.setOnTouchListener(touchListener);
+        dialog = params.view;
+        if (dialog == null) {
+            // TODO: 06.05.17  
+            dialog = LayoutInflater.from(getContext()).inflate(params.layoutRes, this, false);
+        }
+        dialog.setOnTouchListener(touchListener);
         LayoutParams layoutParams = new LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT,
                 ViewGroup.LayoutParams.WRAP_CONTENT, Gravity.CENTER);
-        addView(params.view, layoutParams);
+        addView(dialog, layoutParams);
     }
 
     private void dismiss(SwipeDismissDirection direction) {
@@ -46,7 +54,7 @@ public class Overlay extends FrameLayout {
 
     public void cancel() {
         if (params.cancelListener != null) {
-            params.cancelListener.onCancel(params.view);
+            params.cancelListener.onCancel(dialog);
         }
         dismiss();
     }
