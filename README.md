@@ -1,11 +1,11 @@
 # Swipe-To-Dismiss-Dialog
 
 ## Demo
-[![Swipe Dismiss Success Dialog](https://github.com/andreilisun/Swipe-To-Dismiss-Dialog/tree/master/art/success_dialog.gif)]
+[![Swipe Dismiss Success Dialog](art/success_dialog.gif)]
 
-[![Swipe Dismiss Dialog with input](https://github.com/andreilisun/Swipe-To-Dismiss-Dialog/tree/master/art/edit_text_dialog.gif)]
+[![Swipe Dismiss Dialog with input](art/edit_text_dialog.gif)]
 
-[![Swipe Dismiss Dialog with keyboard](https://github.com/andreilisun/Swipe-To-Dismiss-Dialog/tree/master/art/edit_text_dialog_keyboard.gif)]
+[![Swipe Dismiss Dialog with keyboard](art/edit_text_dialog_keyboard.gif)]
 
 ## Download
 TODO
