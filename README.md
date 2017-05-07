@@ -1,11 +1,11 @@
 # Swipe-To-Dismiss-Dialog
 
 ## Demo 
-[![Success Dialog](art/success_dialog.gif)]
+[!(art/success_dialog.gif)]
 
-[![Dialog with input](art/edit_text_dialog.gif)]
+[!(art/edit_text_dialog.gif)]
 
-[![Dialog with input, keyboard](art/edit_text_dialog_keyboard.gif)]
+[!(art/edit_text_dialog_keyboard.gif)]
 
 ## Download
 TODO
