@@ -85,6 +85,8 @@ public class SwipeDismissDialog extends FrameLayout {
     }
 
     public void dismiss() {
+        dialog.setOnTouchListener(null);
+        removeView(dialog);
         WindowManager windowManager = (WindowManager)
                 getContext().getSystemService(Context.WINDOW_SERVICE);
         windowManager.removeViewImmediate(this);

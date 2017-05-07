@@ -1,1 +1,1 @@
-include ':app', ':swipedismissdialog'
+include ':swipedismissdialog', ':sample'
