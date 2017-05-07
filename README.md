@@ -1,11 +1,11 @@
 # Swipe-To-Dismiss-Dialog
 
-## Demo 
-[!(art/success_dialog.gif)]
+## Demo
+[!(https://github.com/andreilisun/Swipe-To-Dismiss-Dialog/tree/master/art/success_dialog.gif)]
 
-[!(art/edit_text_dialog.gif)]
+[!(https://github.com/andreilisun/Swipe-To-Dismiss-Dialog/tree/master/art/edit_text_dialog.gif)]
 
-[!(art/edit_text_dialog_keyboard.gif)]
+[!(https://github.com/andreilisun/Swipe-To-Dismiss-Dialog/tree/master/art/edit_text_dialog_keyboard.gif)]
 
 ## Download
 TODO
