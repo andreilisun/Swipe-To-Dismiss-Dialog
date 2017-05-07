@@ -10,7 +10,21 @@ Library which can turn any View into a draggable dialog with swipe to dismiss fe
 ![Swipe Dismiss Dialog with keyboard](art/edit_text_dialog_keyboard.gif)
 
 ## Download
-TODO
+To start using this library, add these lines to the `build.gradle` of your project:
+```groovy
+allprojects {
+    repositories {
+        jcenter()
+        maven {
+            url "https://dl.bintray.com/andreilisun/maven"
+        }
+    }
+}
+```
+And this line to the `build.gradle` of your module:
+```groovy
+compile 'com.github.andreilisun:swipedismissdialog:0.1'
+```
 
 ## How to use
 
