@@ -61,9 +61,9 @@ You can set some parameters:
 .setOverlayColor(Color.parseColor("#80FF0000"))
 ```
 
-##License
-Copyright 2017 Lisun Andrii
+## License
 ```
+Copyright 2017 Lisun Andrii
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
 You may obtain a copy of the License at
