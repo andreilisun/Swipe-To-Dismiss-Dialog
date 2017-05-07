@@ -5,7 +5,7 @@
 
 [![Dialog with input](art/edit_text_dialog.gif)]
 
-[![Dialog with input, keyboard](art/edit_text_dialog.gif)]
+[![Dialog with input, keyboard](art/edit_text_dialog_keyboard.gif)]
 
 ## Download
 TODO
@@ -29,7 +29,7 @@ new SwipeDismissDialog.Builder(this)
                 .show();
 ```
 ### Callbacks
-Listen for the tap outside / back pressed events:
+Listen for the canceled by tap outside/back pressed events:
 ```java
 .setOnCancelListener(new OnCancelListener() {
     @Override
@@ -38,7 +38,7 @@ Listen for the tap outside / back pressed events:
     }
 })
 ```
-Listen to the swipe dismiss events:
+Listen for the swipe dismiss event:
 ```java
 .setOnSwipeDismissListener(new OnSwipeDismissListener() {
                     @Override
