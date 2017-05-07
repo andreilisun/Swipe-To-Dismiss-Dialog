@@ -48,13 +48,13 @@ public class MainActivity extends AppCompatActivity {
         addButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                addUser(usernameEditText.getText().toString());
+                addUserSuccess(usernameEditText.getText().toString());
                 swipeDismissDialog.dismiss();
             }
         });
     }
 
-    private void addUser(String username) {
+    private void addUserSuccess(String username) {
         Toast.makeText(this, username + " has been added", Toast.LENGTH_SHORT).show();
     }
 

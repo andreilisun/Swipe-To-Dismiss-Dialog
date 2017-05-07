@@ -12,7 +12,7 @@ public class Params {
     @LayoutRes
     public int layoutRes = 0;
     @FloatRange(from = 0, to = 1.0)
-    public float flingVelocity = 0.15f;
+    public float flingVelocity = 0.1f;
     @ColorInt
     public int overlayColor = Color.parseColor("#80444444");
     @Nullable
