@@ -1,6 +1,6 @@
 # Swipe-To-Dismiss-Dialog [ ![Download](https://api.bintray.com/packages/andreilisun/maven/swipedismissdialog/images/download.svg) ](https://bintray.com/andreilisun/maven/swipedismissdialog/_latestVersion) [![License](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](https://opensource.org/licenses/Apache-2.0)
 
-Library which can turn any View into a draggable dialog with swipe to dismiss feature.
+Android library which can turn any View into a draggable dialog with swipe to dismiss feature.
 
 ## Demo
 ![Swipe Dismiss Success Dialog](art/success_dialog.gif)
