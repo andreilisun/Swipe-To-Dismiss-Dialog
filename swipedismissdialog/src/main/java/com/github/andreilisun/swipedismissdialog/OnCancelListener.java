@@ -1,4 +1,4 @@
-package com.github.andreilisun.swipetodismissdialog.swipedismissdialog;
+package com.github.andreilisun.swipedismissdialog;
 
 import android.view.View;
 

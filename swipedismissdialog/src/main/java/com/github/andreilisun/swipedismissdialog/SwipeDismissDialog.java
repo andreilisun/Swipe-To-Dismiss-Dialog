@@ -1,4 +1,4 @@
-package com.github.andreilisun.swipetodismissdialog.swipedismissdialog;
+package com.github.andreilisun.swipedismissdialog;
 
 import android.animation.ObjectAnimator;
 import android.animation.PropertyValuesHolder;
@@ -30,7 +30,7 @@ public class SwipeDismissDialog extends FrameLayout {
     private final Params params;
     private View dialog;
 
-    public SwipeDismissDialog(@NonNull Context context, Params params) {
+    protected SwipeDismissDialog(@NonNull Context context, Params params) {
         super(context);
         this.params = params;
         this.gestureDetector = new GestureDetector(context, flingGestureListener);
