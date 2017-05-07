@@ -1,4 +1,5 @@
 apply plugin: 'com.android.library'
+apply plugin: 'com.novoda.bintray-release'
 
 android {
     compileSdkVersion 25
@@ -29,4 +30,13 @@ android {
 
 dependencies {
     compile 'com.android.support:appcompat-v7:25.3.1'
+}
+
+publish {
+    userOrg = 'andreilisun'
+    groupId = 'com.github.andreilisun'
+    artifactId = 'swipedismissdialog'
+    publishVersion = '0.1'
+    desc = 'Library which can turn any View into a draggable dialog with swipe to dismiss feature.'
+    website = 'https://github.com/andreilisun/Swipe-To-Dismiss-Dialog'
 }
