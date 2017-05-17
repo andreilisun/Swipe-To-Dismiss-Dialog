@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">TestApplication</string>
+    <string name="activity_main_show_dialog">Show dialog</string>
+    <string name="dialog_test_title">Test title</string>
+</resources>
