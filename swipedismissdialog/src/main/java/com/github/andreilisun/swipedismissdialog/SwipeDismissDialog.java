@@ -75,11 +75,11 @@ public class SwipeDismissDialog extends FrameLayout {
         layoutParams.type = WindowManager.LayoutParams.TYPE_APPLICATION;
         layoutParams.format = PixelFormat.TRANSLUCENT;
         if (params.translucentStatus && params.translucentNavigation) {
-            layoutParams.flags = WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE | WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS | WindowManager.LayoutParams.FLAG_TRANSLUCENT_NAVIGATION;
+            layoutParams.flags = WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS | WindowManager.LayoutParams.FLAG_TRANSLUCENT_NAVIGATION;
         } else if (params.translucentStatus) {
-            layoutParams.flags = WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE | WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS;
+            layoutParams.flags = WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS;
         } else if (params.translucentNavigation) {
-            layoutParams.flags = WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE | WindowManager.LayoutParams.FLAG_TRANSLUCENT_NAVIGATION;
+            layoutParams.flags = WindowManager.LayoutParams.FLAG_TRANSLUCENT_NAVIGATION;
         }
         windowManager.addView(this, layoutParams);
         return this;
