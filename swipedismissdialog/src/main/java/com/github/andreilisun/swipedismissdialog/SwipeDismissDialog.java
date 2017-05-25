@@ -89,7 +89,8 @@ public class SwipeDismissDialog extends FrameLayout {
         if (params.cancelListener != null) {
             params.cancelListener.onCancel(dialog);
         }
-        dismiss();
+        if (params.dismissOnCancel)
+            dismiss();
     }
 
     public void dismiss() {
@@ -232,6 +233,11 @@ public class SwipeDismissDialog extends FrameLayout {
         @RequiresApi(19)
         public Builder setTranslucentNavigation(boolean enabled) {
             params.translucentNavigation = enabled;
+            return this;
+        }
+
+        public Builder setDismissOnCancel(boolean enabled) {
+            params.dismissOnCancel = enabled;
             return this;
         }
 
