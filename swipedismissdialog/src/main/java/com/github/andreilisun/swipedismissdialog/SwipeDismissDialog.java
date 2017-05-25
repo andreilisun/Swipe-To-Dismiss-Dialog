@@ -81,7 +81,9 @@ public class SwipeDismissDialog extends FrameLayout {
         if (params.cancelListener != null) {
             params.cancelListener.onCancel(dialog);
         }
-        dismiss();
+        if (params.dismissOnCancel) {
+            dismiss();
+        }
     }
 
     public void dismiss() {
@@ -212,6 +214,11 @@ public class SwipeDismissDialog extends FrameLayout {
         public Builder setLayoutResId(@LayoutRes int layoutResId) {
             params.layoutRes = layoutResId;
             params.view = null;
+            return this;
+        }
+
+        public Builder setDismissOnCancel(boolean enabled) {
+            params.dismissOnCancel = enabled;
             return this;
         }
 

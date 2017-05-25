@@ -21,4 +21,5 @@ public class Params {
     public OnCancelListener cancelListener;
     @FloatRange(from = 0.0, to = 35.0)
     public float horizontalOscillation = 35.0f;
+    public boolean dismissOnCancel = true;
 }
