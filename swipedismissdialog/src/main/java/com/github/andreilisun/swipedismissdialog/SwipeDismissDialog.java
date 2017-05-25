@@ -10,6 +10,7 @@ import android.support.annotation.FloatRange;
 import android.support.annotation.LayoutRes;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.support.annotation.RequiresApi;
 import android.view.GestureDetector;
 import android.view.GestureDetector.SimpleOnGestureListener;
 import android.view.Gravity;
@@ -222,11 +223,13 @@ public class SwipeDismissDialog extends FrameLayout {
             return this;
         }
 
+        @RequiresApi(19)
         public Builder setTranslucentStatus(boolean enabled) {
             params.translucentStatus = enabled;
             return this;
         }
 
+        @RequiresApi(19)
         public Builder setTranslucentNavigation(boolean enabled) {
             params.translucentNavigation = enabled;
             return this;
