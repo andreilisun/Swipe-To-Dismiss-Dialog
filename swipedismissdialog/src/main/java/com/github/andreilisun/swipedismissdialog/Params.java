@@ -5,10 +5,15 @@ import android.support.annotation.ColorInt;
 import android.support.annotation.FloatRange;
 import android.support.annotation.LayoutRes;
 import android.support.annotation.Nullable;
+import android.support.annotation.RequiresApi;
 import android.view.View;
 
 public class Params {
     public View view = null;
+    @RequiresApi(19)
+    public boolean translucentStatus;
+    @RequiresApi(19)
+    public boolean translucentNavigation;
     @LayoutRes
     public int layoutRes = 0;
     @FloatRange(from = 0, to = 1.0)

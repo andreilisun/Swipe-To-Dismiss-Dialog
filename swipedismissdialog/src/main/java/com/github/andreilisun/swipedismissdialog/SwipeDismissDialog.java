@@ -73,6 +73,13 @@ public class SwipeDismissDialog extends FrameLayout {
         layoutParams.width = WindowManager.LayoutParams.MATCH_PARENT;
         layoutParams.type = WindowManager.LayoutParams.TYPE_APPLICATION;
         layoutParams.format = PixelFormat.TRANSLUCENT;
+        if (params.translucentStatus && params.translucentNavigation) {
+            layoutParams.flags = WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE | WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS | WindowManager.LayoutParams.FLAG_TRANSLUCENT_NAVIGATION;
+        } else if (params.translucentStatus) {
+            layoutParams.flags = WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE | WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS;
+        } else if (params.translucentNavigation) {
+            layoutParams.flags = WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE | WindowManager.LayoutParams.FLAG_TRANSLUCENT_NAVIGATION;
+        }
         windowManager.addView(this, layoutParams);
         return this;
     }
@@ -212,6 +219,16 @@ public class SwipeDismissDialog extends FrameLayout {
         public Builder setLayoutResId(@LayoutRes int layoutResId) {
             params.layoutRes = layoutResId;
             params.view = null;
+            return this;
+        }
+
+        public Builder setTranslucentStatus(boolean enabled) {
+            params.translucentStatus = enabled;
+            return this;
+        }
+
+        public Builder setTranslucentNavigation(boolean enabled) {
+            params.translucentNavigation = enabled;
             return this;
         }
 
