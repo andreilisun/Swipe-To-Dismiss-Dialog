@@ -25,5 +25,7 @@ android {
 dependencies {
     compile "com.android.support:appcompat-v7:$rootProject.supportLibraryVersion"
     compile "com.android.support:design:$rootProject.supportLibraryVersion"
-    compile 'com.github.andreilisun:swipedismissdialog:0.1'
+    /*Use this in your app instead of importing local library:
+    compile 'com.github.andreilisun:swipedismissdialog:[VERSION]'*/
+    compile project(':swipedismissdialog')
 }
